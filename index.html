@@ -81,6 +81,167 @@
         });
     });
 
+	$(function () {
+		$('#chart_sales').highcharts({
+			title: {
+				text: '売上高の推移',
+				x: -20 //center
+			},
+			/*
+			subtitle: {
+				text: 'Source: WorldClimate.com',
+				x: -20
+			},
+			*/
+			xAxis: {
+				categories: ['2009', '2010', '2011', '2012', '2013']
+			},
+			yAxis: {
+				title: {
+					text: '売上高 (億円)'
+				},
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				valueSuffix: '億円'
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle',
+				borderWidth: 0
+			},
+			series: [{
+				name: 'Z社',
+				data: [3341, 3707, 4029, 4175, 4683]
+				//data: [334172, 370769, 402962, 417577, 468377]
+			}, {
+				name: 'S社',
+				data: [970, 1015, 1077, 1165, 1256]
+				//data: [97079, 101576, 107754, 116525, 125666]
+			}]
+		});
+
+
+		$('#chart_shops').highcharts({
+			title: {
+				text: '店舗数の推移',
+				x: -20 //center
+			},
+			/*
+			subtitle: {
+				text: 'Source: WorldClimate.com',
+				x: -20
+			},
+			*/
+			xAxis: {
+				categories: ['2009', '2010', '2011', '2012', '2013']
+			},
+			yAxis: {
+				title: {
+					text: '店舗数 (店)'
+				},
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				valueSuffix: '店'
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle',
+				borderWidth: 0
+			},
+			series: [{
+				name: 'Z社',
+				data: [3943, 3707, 4029, 4175, 4683]
+			}, {
+				name: 'S社',
+				data: [877, 912, 955, 985, 1034]
+			}]
+		});
+
+
+
+
+		$('#chart_employee').highcharts({
+			title: {
+				text: '従業員数の推移',
+				x: -20 //center
+			},
+			/*
+			subtitle: {
+				text: 'Source: WorldClimate.com',
+				x: -20
+			},
+			*/
+			xAxis: {
+				categories: ['2009', '2010', '2011', '2012', '2013']
+			},
+			yAxis: {
+				title: {
+					text: '期末従業員数 (人)'
+				},
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				valueSuffix: '人'
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle',
+				borderWidth: 0
+			},
+			series: [{
+				name: 'Z社',
+				data: [4794,4858,4841,5343,5928]
+			}, {
+				name: 'S社',
+				data: [1879,1868,1840,1821,2003]
+			}]
+		});
+
+		// グラフの非表示
+		$('#chart_shops').hide();
+		$('#chart_employee').hide();
+
+        $("#button_sales").click(function () {
+            $('#chart_shops').hide();
+            $('#chart_employee').hide();
+            $('#chart_sales').show();
+        });
+
+        $("#button_shops").click(function () {
+            $('#chart_employee').hide();
+            $('#chart_sales').hide();
+            $('#chart_shops').show();
+        });
+
+        $("#button_employee").click(function () {
+            $('#chart_sales').hide();
+            $('#chart_shops').hide();
+            $('#chart_employee').show();
+        });
+
+	});
+
+
+
+
+
 </script>    
   </head>
   <body>
@@ -133,6 +294,28 @@
 					</div>
 				</div>
         </div>
+
+
+      <!-- HIGH CHART BLOCK -->
+        <div class="col-sm-3 col-lg-3">
+      		<div class="dash-unit" style="height: 600px;">
+	      		<dtitle>Chart</dtitle>
+	      		<hr>
+				<div id="chart_sales" style="width: 100%; height: 500px; margin: 0 auto"></div>
+				<div id="chart_shops" style="width: 100%; height: 500px; margin: 0 auto;"></div>
+				<div id="chart_employee" style="width: 100%; height: 500px; margin: 0 auto;"></div>
+
+				<div style="padding: 5px;">
+				<div class="btn-group" role="group" aria-label="">
+					<button class="btn btn-default" id="button_sales" role="button">売上高</button>
+					<button class="btn btn-default" id="button_shops" role="button">店舗数</button>
+					<button class="btn btn-default" id="button_employee" role="button">従業員数</button>
+				</div>
+
+				</div>
+			</div>
+        </div>
+
 
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
