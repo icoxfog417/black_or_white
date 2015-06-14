@@ -1,0 +1,15 @@
+# Standard ignores
+*.DS_Store
+*.swp
+*.idea
+*.project
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+
+## Directory-based project format
+.idea/
+
+## File-based project format
+*.ipr
+*.iml
+*.iws
