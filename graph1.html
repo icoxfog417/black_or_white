@@ -16,10 +16,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/single-page-admin/bootstrap.js"></script>
 	<script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/single-page-admin/lineandbars.js"></script>
-    
-	<script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/single-page-admin/dash-charts.js"></script>
-	<script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/single-page-admin/gauge.js"></script>
-	
+
 	<!-- NOTY JAVASCRIPT -->
 	<script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/single-page-admin/noty/jquery.noty.js"></script>
 	<script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/single-page-admin/noty/layouts/top.js"></script>
@@ -30,11 +27,11 @@
 	<!-- You can add more layouts if you want -->
 	<script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/single-page-admin/noty/themes/default.js"></script>
     <!-- <script type="text/javascript" src="assets/js/dash-noty.js"></script> This is a Noty bubble when you init the theme-->
-	<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/highcharts-more.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
 	<script src="http://www.prepbootstrap.com/Content/js/single-page-admin/jquery.flexslider.js" type="text/javascript"></script>
 
-    <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/single-page-admin/admin.js"></script>
-      
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -81,7 +78,59 @@
         });
     });
 
-</script>    
+</script>
+	<script type="text/javascript">
+	var CHART1_DATA = {
+		"A0": function(){ return [[0, 2009, 97079], [0, 2010, 101576], [0, 2011, 107754], [0, 2012, 116525], [0, 2013, 125666]]},
+		"A1": function(){ return [[0, 2009, 1879], [0, 2010, 1868], [0, 2011, 1840], [0, 2012, 1821], [0, 2013, 2003]]},
+		"B0": function(){ return [[1, 2009, 334172], [1, 2010, 370769], [1, 2011, 402962], [1, 2012, 417577], [1, 2013, 468377]]},
+		"B1": function(){ return [[1, 2009, 4794], [1, 2010, 4858], [1, 2011, 4841], [1, 2012, 5343], [1, 2013, 5928]]}
+	}
+    $(function () {
+		$('#chart1').highcharts({
+        chart: {
+            type: 'bubble',
+            zoomType: 'xy',
+        },
+		legend: {
+			enabled: false
+		},
+        title: {
+            text: '企業の規模'
+        },
+        xAxis: {
+            categories: ["A社", "B社"]
+        },
+        yAxis: {
+            title: {
+                text: 'Year'
+            }
+        },
+        series: [{
+        	name: "A社",
+            data: CHART1_DATA["A0"]()
+        }, {
+        	name: "B社",
+            data: CHART1_DATA["B0"]()
+        }]
+    	});
+
+    	$("#change").click(function(){
+    		var chart1 = $("#chart1").highcharts();
+    		var text = $(this).text();
+    		if(text == "売上"){
+    			$(this).text("従業員数");
+				chart1.series[0].setData(CHART1_DATA["A0"]());
+				chart1.series[1].setData(CHART1_DATA["B0"]());
+    		}else{
+    			$(this).text("売上");
+				chart1.series[0].setData(CHART1_DATA["A1"]());
+				chart1.series[1].setData(CHART1_DATA["B1"]());
+    		}
+    	});
+	});
+    </script>
+
   </head>
   <body>
   
@@ -120,7 +169,7 @@
 		  		<dtitle>Company Sacle</dtitle>
 		  		<hr>
 	        	<div id="chart1"></div>
-	        	<h2>45%</h2>
+	        	<button id="change" class="btn primary">従業員数</button>
 			</div>
         </div>
 	  </div><!--/row -->
@@ -138,5 +187,5 @@
       		</div><!-- /row -->
       	</div><!-- /container -->		
 	</div><!-- /footerwrap -->
-          
+
 </body></html>
